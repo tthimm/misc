@@ -16,7 +16,7 @@
 require 'date'
 
 SHOW_CLOCK = true
-SHOW_MPD_SONG = true
+SHOW_MPD_SONG = false
 
 def time_and_date
   return nil unless SHOW_CLOCK
@@ -24,7 +24,7 @@ def time_and_date
 end
 
 def mpd_song
-  return nil unless SHOW_MPD_SONG
+  return nil unless SHOW_MPD_SONG && File.exist?('/usr/bin/mpd')
   status_and_song = nil
   match = %r(\A(?:.+:\s(.+)|\A(.+))\n(\[.+\])).match(%x(mpc status))
   if match then
